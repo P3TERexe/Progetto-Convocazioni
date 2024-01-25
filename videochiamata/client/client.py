@@ -47,17 +47,14 @@ def main():
             elif filter == 3:
                 received_frame = cv2.flip(received_frame, 0)
             elif filter == 4:
-                hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
-                # define range of blue color in HSV
-                lower_blue = np.array([0,0,0])
-                upper_blue = np.array([255,255,255])
-
-                # Threshold the HSV image to get only blue colors
-                mask = cv2.inRange(hsv, lower_blue, upper_blue)
-
-                # Bitwise-AND mask and original image
-                received_frame = cv2.bitwise_and(frame,frame, mask= mask)
+                red_channel = src[:,:,2]
+                
+                # create empty image with same shape as that of src image
+                red_img = np.zeros(src.shape)
+                
+                #assign the red channel of src to empty image
+                received_frame = red_img[:,:,2] = red_channel
+                
                 
 
 
